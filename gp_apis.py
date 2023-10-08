@@ -90,17 +90,17 @@ def gp_test4(input1, input2, dim1_0, dim1_1, dim1_2, dim1_3, t, device0):
 
 def gp_mat_dot(input1, input2, dim1_0, dim1_1, M, P, N, device0):
 
-    print('inside gp_mat_dot, input1\n', input1, input1.shape)
-    print('inside gp_mat_dot, input2.\n',input2, input2.shape)
+    #print('inside gp_mat_dot, input1\n', input1, input1.shape)
+    #print('inside gp_mat_dot, input2.\n',input2, input2.shape)
     input1_dl = th.utils.dlpack.to_dlpack(input1)
     input2_dl = th.utils.dlpack.to_dlpack(input2)
     res1 = th.zeros(dim1_0, dim1_1, device = device0 )
     res_dl1 = th.utils.dlpack.to_dlpack(res1)
 
-    print('inside gp_mat dot res shape before,\n', res1.shape, res1)
+    #print('inside gp_mat dot res shape before,\n', res1.shape, res1)
     gpk.mat_dot(input1_dl, input2_dl, res_dl1, M, P, N)
-    print("inside gp_mat res:\n", res1)
-    print('--------------------------')
+    #print("inside gp_mat res:\n", res1)
+    #print('--------------------------')
     return res1
 
 def gp_mat_transpose(input1, dim1_0, dim1_1, M, N, device0):
@@ -109,11 +109,11 @@ def gp_mat_transpose(input1, dim1_0, dim1_1, M, N, device0):
     input1_dl = th.utils.dlpack.to_dlpack(input1)
     res1 = th.zeros(dim1_0, dim1_1, device = device0)
 
-    print('inside mat trasnpose shape res: ',res1.shape)
+    #print('inside mat trasnpose shape res: ',res1.shape)
     res_dl1 = th.utils.dlpack.to_dlpack(res1)
     gpk.mat_transpose(input1_dl, res_dl1, M, N)
-    print("transpose:\n", res1)
-    print('---------------------------')
+    #print("transpose:\n", res1)
+    #print('---------------------------')
     return res1
     
 def gp_mat_add(input1, input2, dim1_0, dim1_1, M, N, device0):
@@ -130,7 +130,7 @@ def gp_mat_mul(input1, input2, dim1_0, dim1_1, M, N, device0):
     res_dl1 = th.utils.dlpack.to_dlpack(res1)
     gpk.mat_mul(input1_dl, input2_dl, res_dl1, M, N)
     return res1
-def gp_mat_norm(input1, M, N, device0):
+def gp_mat_norm(input1, M, N, device0): # not required
     input1_dl = th.utils.dlpack.to_dlpack(input1)
     gpk.mat_norm(input1_dl, M, N)
     return 
