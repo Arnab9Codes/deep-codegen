@@ -29,13 +29,8 @@ class lenet_300(nn.Module):
         super(lenet_300, self).__init__()
         self.fc1 = nn.Linear(28 * 28, 300)
         self.relu1 = nn.ReLU(inplace = True)
-    
         self.relu2 = nn.ReLU(inplace = True)
-    
         self.fc3 = nn.Linear(100, 10)
-    
-        self.init_params = self.state_dict()
-
         self.weight = nn.Parameter(torch.Tensor(300, 100))
         self.bias = nn.Parameter(torch.Tensor(100)) 
     
@@ -45,7 +40,7 @@ class lenet_300(nn.Module):
         out = self.relu1(out)
         out = linear_new(out, self.weight, self.bias)
         out = self.relu2(out)
-        logits = self.fc3(out)
+        logits = self.fc3(out)# nn.Softmax(out) 
     
         return logits 
 
