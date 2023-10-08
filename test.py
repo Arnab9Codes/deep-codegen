@@ -2,13 +2,18 @@ import torch
 from pytorch_apis import mat_dot, mat_transpose, mat_add, mat_mul
 
 M =2
-P=30000
-N =2
+P=2#0000
+N =3
 
-a = torch.rand((M,P), dtype=torch.float32)
-b = torch.rand((P,N), dtype=torch.float32)
+#a = torch.rand((M,P), dtype=torch.float32)
+#b = torch.rand((P,N), dtype=torch.float32)
 #o = torch.rand(dim_0)
 
+a= torch.tensor([[1., 1.],
+        [1., 1.],], requires_grad=True)
+
+b =torch.tensor([[2.3400, 4.0000, 3.9000],
+        [5.0000, 4.0000, 3.8000],], requires_grad=True)
 device = torch.device("cuda")
 
 a = a.to(device)
