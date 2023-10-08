@@ -45,11 +45,13 @@ class lenet_300(nn.Module):
         out = self.relu1(out)
         out = linear_new(out, self.weight, self.bias)
         out = self.relu2(out)
-        logits = nn.Softmax(self.fc3(out), dim = 0)
+        logits = self.fc3(out)
     
         return logits 
 
-lenet_model = lenet_300()
+
+device = torch.device("cuda")
+lenet_model = lenet_300().to(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(lenet_model.parameters(), lr=0.001)
@@ -63,7 +65,7 @@ for epoch in range(num_epochs):
     
     for batch_idx, (inputs, targets) in enumerate(train_loader):
         
-
+        inputs, targets = inputs.to(device), targets.to(device)
         optimizer.zero_grad() 
         outputs = lenet_model(inputs)
         loss = criterion(outputs, targets)
