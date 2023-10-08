@@ -43,9 +43,9 @@ __global__ void tiled_dot(float *a, float *b, float*c, const int M, const int P,
     float partialSum = 0.0f;
     int tile_count = ceil((float)P/(float)tile_dim);
 
-    if(tx ==0 && ty ==0){
-        printf("tile count %d ", tile_count);
-    }
+    //if(tx ==0 && ty ==0){
+    //    printf("tile count %d ", tile_count);
+    //}
     for(int tile=0; tile < tile_count; tile++){
 
         if(((tile * tile_dim + tx)<P) && (row < M)){
@@ -70,7 +70,7 @@ __global__ void tiled_dot(float *a, float *b, float*c, const int M, const int P,
 
     if((row<M) && (col<N)){
         c[row*N+col] = partialSum;
-        printf("\n-%d %d %f", row, col, partialSum);
+        //printf("\n-%d %d %f", row, col, partialSum);
     }
     partialSum =0.0f;
 
@@ -87,7 +87,7 @@ void invoke_mat_dot(float *da, float* db, float* dc, int M, int P, int N){
     dim3 ngrids(g2, g1);// ------------------------------ change here
     dim3 nblocks(tile_dim, tile_dim);
 
-    printf("g1: %d g2: %d, tile dim: %d\n", g1, g2, tile_dim);
+    //printf("g1: %d g2: %d, tile dim: %d\n", g1, g2, tile_dim);
 
     //tiled_dot<<<ngrids, nblocks>>>(da, db, dc, M, P, N);
     normal_dot<<<ngrids, nblocks>>>(da, db, dc, M, P, N);
@@ -119,7 +119,7 @@ void invoke_transpose(float *a, float *o, const int M, const int N){
     
     cudaError_t cudastatus;
 
-    printf("\ninvoked transpose kernel.\n");
+    //printf("\ninvoked transpose kernel.\n");
 
     mat_transpose<<<M, N>>>(a, o, M, N);
 
@@ -148,7 +148,7 @@ __global__ void mat_add(float *a, float *b, float*c, const int M, const int N ){
 void invoke_addition(float *da, float *db, float *dc, int M, int N){
     
     cudaError_t cudastatus;
-    printf("\n invoked addition kernel.\n");
+    //printf("\n invoked addition kernel.\n");
     mat_add<<<M, N>>>(da, db, dc, M, N);
     cudastatus=cudaDeviceSynchronize();
 
