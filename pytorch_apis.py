@@ -283,17 +283,17 @@ class LinearNew(th.autograd.Function):
         assert N == dL_dY.shape[1], "did not match"
 
         device = torch.device("cuda") 
-        #print('dL_dy:',dL_dY, 'shape: ', dL_dY.shape)
-
+        #print('dL_dy:',dL_dY, 'shape: ', dL_dY.shape)        
+        #print('w tensor:',w, 'w shape:', w.shape)
+        
         wt = gp_apis.gp_mat_transpose(w, w.shape[1], w.shape[0], w.shape[0], w.shape[1], device)
         xt = gp_apis.gp_mat_transpose(x, x.shape[1], x.shape[0], x.shape[0], x.shape[1], device)
-        
-        #print('w tensor:',w, 'w shape:', w.shape)
 
         #print('wt',wt, 'wt shape:', wt.shape)
         #print('x tensor:',x,' x shape:', x.shape)
         #print('xt tensor:',xt,' x shape:', xt.shape)
         #print('dL_dy:',dL_dY, 'shape: ', dL_dY.shape)
+   
         d_x = gp_apis.gp_mat_dot(dL_dY, wt, x.shape[0], x.shape[1], dL_dY.shape[0], dL_dY.shape[1], wt.shape[1], device)
 
         #print('-----------------dX--------------------')
