@@ -64,10 +64,5 @@ class LinearNew(nn.Module):
         self.b = nn.Parameter(torch.rand(hidden))
         self.device = device
 
-        # Initialize weights and biases
-        #nn.init.xavier_uniform_(self.weight)
-        #nn.init.uniform_(self.bias)
-
-
     def forward(self, x):
         return LinearNewfunc.apply(x, self.w, self.b, self.device)
