@@ -1,7 +1,7 @@
 command to run:</br>
 `python lenet300.py`
 
-saved model: `./state_dict` folder
+saved model: `./state_dict` folder</br>
 training log: `training.txt`, accuracy around 96%
 
 backward implementation is in `pytorch_apis.py`
