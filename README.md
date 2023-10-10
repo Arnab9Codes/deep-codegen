@@ -1,6 +1,7 @@
-command to run:</br>
+# command to run:</br>
 `python lenet300.py`
 
+# achieves 96% accuracy
 saved model: `./state_dict` folder</br>
 training log: `training.txt`, accuracy around </h2>96%</h2>
 
